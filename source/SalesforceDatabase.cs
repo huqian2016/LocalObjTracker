@@ -650,6 +650,11 @@ namespace LocalObjTracker
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
                                 historyData[reader.GetName(i)] = reader.GetValue(i);
+
+                                if (reader.GetName(i) != "LastRetrievedAt" && historyData[reader.GetName(i)] is DateTime)
+                                {
+                                    historyData[reader.GetName(i)] = ((DateTime)historyData[reader.GetName(i)]).ToUniversalTime();
+                                }
                             }
                             histories.Add(historyData);
                         }
